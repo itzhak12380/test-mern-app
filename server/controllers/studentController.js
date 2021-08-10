@@ -1,5 +1,4 @@
 const studentModel=require('../Models/studentModels')
-const mongo = require('mongodb')
 
 async function getAllStudent(req, res) {
     // const result = await studentModel.find({});
