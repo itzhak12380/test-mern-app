@@ -8,19 +8,19 @@ const db = require('./DB');
 const blogRouter = require('./Routes/Router')
 const path = require('path');
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT ;
 
 app.use(express.json());
-app.use(express.urlencoded())
+app.use(express.urlencoded({extended:true}))
 app.use(cors())
 
 db.on('error', () => { console.log("connection error") })
 
+app.use('/api/blogs', blogRouter)
 app.listen(PORT, () => {
     console.log(`mern server is live and up on port: ${PORT}`);
 })
 
-app.use('/api/blogs', blogRouter)
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
