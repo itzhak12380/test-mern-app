@@ -16,6 +16,8 @@ db.on('error',()=>{console.log('connection error')})
 app.listen(PORT,()=>{
     console.log(`server live on port: ${PORT}`);
 })
+
+/* comment */
 app.use('/students',Blog)
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static(path.join(__dirname,'../client/build')))
