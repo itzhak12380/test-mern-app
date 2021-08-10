@@ -18,7 +18,7 @@ app.listen(PORT,()=>{
 })
 
 /* comment */
-app.use('/students',Blog)
+app.use('/api/students',Blog)
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static(path.join(__dirname,'../client/build')))
     
