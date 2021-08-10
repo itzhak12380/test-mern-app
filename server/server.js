@@ -6,7 +6,7 @@ const exsprees=require('express');
 const cors = require('cors');
 const mongodbClient = require('mongodb').MongoClient;
 const Blog = require('./Routes/Router');
-const { patch } = require('./Routes/Router');
+// const { patch } = require('./Routes/Router');
 const PORT=process.env.PORT||8080;
 const app = exsprees();
 app.use(exsprees.json());
