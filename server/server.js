@@ -1,29 +1,30 @@
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 dotenv.config();
-const path  = require('path')
-const db = require('./DB/index')
-const exsprees=require('express');
+
 const cors = require('cors');
-const mongodbClient = require('mongodb').MongoClient;
-const Blog = require('./Routes/Router');
-// const { patch } = require('./Routes/Router');
-const PORT=process.env.PORT||8080;
-const app = exsprees();
-app.use(exsprees.json());
-app.use(exsprees.urlencoded({extended:true}));
-app.use(cors());
-db.on('error',()=>{console.log('connection error')})
-app.listen(PORT,()=>{
-    console.log(`server live on port: ${PORT}`);
+const express = require('express');
+const app = express();
+const db = require('./DB');
+const blogRouter = require('./Routes/Router')
+const path = require('path');
+
+const PORT = process.env.PORT || 8080;
+
+app.use(express.json());
+app.use(express.urlencoded())
+app.use(cors())
+
+db.on('error', () => { console.log("connection error") })
+
+app.listen(PORT, () => {
+    console.log(`mern server is live and up on port: ${PORT}`);
 })
 
-/* comment */
-app.use('/api/students',Blog)
-if(process.env.NODE_ENV === 'production'){
-    app.use(express.static(path.join(__dirname,'../client/build')))
-    
-    app.get('*',(req,res)=>{
-        res.sendFile(path.join(__dirname,'../client/build','index.html'))
-    })
-}
+app.use('/api/blogs', blogRouter)
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/build')));
+    app.get('*', (req, res)=>{
+        res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+    });
+  }

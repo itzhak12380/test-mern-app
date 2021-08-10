@@ -1,8 +1,17 @@
 const studentModel=require('../Models/studentModels')
 const mongo = require('mongodb')
+
 async function getAllStudent(req, res) {
-    const result = await studentModel.find({});
-    return { message:"success", data: result };
+    // const result = await studentModel.find({});
+    // return { message:"success", data: result };
+    try{
+        await studentModel.find({},(erro, result)=>{
+            res.json(result)
+        })
+    }
+    catch(error) {
+        res.json({message:"faild",error:error})
+    }
 }
 
 function CreateStudent(req,res){
